@@ -1,0 +1,8 @@
+CompileFlags:
+  Add:
+    - --target=riscv32-esp-elf
+    - -isystem/home/sqyd/.platformio/packages/toolchain-riscv32-esp/riscv32-esp-elf/include/c++/8.4.0
+    - -isystem/home/sqyd/.platformio/packages/toolchain-riscv32-esp/riscv32-esp-elf/include/c++/8.4.0/riscv32-esp-elf
+  Remove:
+    - -fstrict-volatile-bitfields
+    - -fno-tree-switch-conversion
