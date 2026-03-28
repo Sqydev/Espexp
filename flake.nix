@@ -64,10 +64,10 @@
             	ln -sf $REAL_ESPTOOL ~/.platformio/packages/tool-esptoolpy/esptool.py
             
             	if [ ! -f ~/.platformio/packages/tool-esptoolpy/package.json ]; then
-            	  	echo '{"name": "tool-esptoolpy", "version": "4.6.2", "description": "esptool.py"}' > ~/.platformio/packages/tool-esptoolpy/package.json
+             		echo '{"name": "tool-esptoolpy", "version": "4.6.2", "description": "esptool.py"}' > ~/.platformio/packages/tool-esptoolpy/package.json
             	fi
           	'';
-          		runScript = "bash";
+          	runScript = "bash";
         	}).env;
     	}
 	);
