@@ -1,4 +1,4 @@
-#include "HardwareSerial.h"
+#include <HardwareSerial.h>
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WebServer.h>
@@ -16,21 +16,17 @@ WebServer server(80);
 
 int sliderValue = 0;
 
-void handleRoot() {
-    File file = SPIFFS.open("/index.html", "r");
-    server.streamFile(file, "text/html");
-    file.close();
-}
-
 void handleSlider() {
-  if (server.hasArg("value")) {
-    sliderValue = server.arg("value").toInt();
-    Serial.println(sliderValue);
-  }
-  server.send(200, "text/plain", "OK");
+  	if(server.hasArg("value")) {
+		sliderValue = server.arg("value").toInt();
+    	Serial.println(sliderValue);
+  	}
+  	server.send(200, "text/plain", "OK");
 }
 
 void setup() {
+	Serial.begin(115200);
+
 	pinMode(LED, OUTPUT);
     ledcSetup(LED_CHANNEL, LED_FREQ, LED_RESOLUTION);
     ledcAttachPin(LED, LED_CHANNEL);
@@ -42,8 +38,9 @@ void setup() {
 
     WiFi.softAP(WIFI, HASLO);
 
-    server.on("/", handleRoot);
 	server.on("/slider", handleSlider);
+	// It's like if someone asks for anything search it in root and if exists give it to them
+	server.serveStatic("/", SPIFFS, "/");
     server.begin();
 }
 

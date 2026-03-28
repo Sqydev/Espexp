@@ -1,20 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <body>
-	  <span id="value">50</span>
-	  <input type="range" id="slider" min="0" max="255" value="60" oninput="updateSliderVal(this.value)">
-	  <button onclick="sendValue()">Set</button>
-		<script>
+	<body>
+		<span id="value">50</span>
+		<input type="range" id="slider" min="0" max="255" value="60" oninput="updateSliderVal(this.value); sendValue(this.value)">
 
-			function updateSliderVal(val) {
-				document.getElementById("value").innerText = val;
-			}
-	
-			function sendValue() {
-				const val = document.getElementById("slider").value;
-				fetch(`/slider?value=${val}`);
-			}
-		
-		</script>
-  </body>
+		<script src="script.js"></script>
+	</body>
 </html>
