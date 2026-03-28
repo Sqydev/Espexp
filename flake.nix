@@ -47,25 +47,26 @@
             		expat
           		]);
           
-				profile = ''
-  					unset CPATH
-  					unset C_INCLUDE_PATH
-  					unset CPLUS_INCLUDE_PATH
-  					unset LIBRARY_PATH
-  					unset LD_LIBRARY_PATH
+			profile = ''
+            	export NIX_CFLAGS_COMPILE=""
+            	export NIX_LDFLAGS=""
+            
+            	unset CPATH
+            	unset C_INCLUDE_PATH
+            	unset CPLUS_INCLUDE_PATH
 
-  					export NIX_CFLAGS_COMPILE=""
-  					export NIX_LDFLAGS=""
-  
-  					export PYTHONPATH="${pythonWithDeps}/${pkgs.python3.sitePackages}:$PYTHONPATH"
-  					export PLATFORMIO_PYTHON_PATH="${pythonWithDeps}/bin/python3"
-
-  					mkdir -p ~/.platformio/packages/tool-esptoolpy
-  					ln -sf ${pkgs.esptool}/bin/esptool.py ~/.platformio/packages/tool-esptoolpy/esptool.py
-  					if [ ! -f ~/.platformio/packages/tool-esptoolpy/package.json ]; then
-    					echo '{"name": "tool-esptoolpy", "version": "4.6.2", "description": "esptool.py"}' > ~/.platformio/packages/tool-esptoolpy/package.json
-  					fi
-				'';
+            	export PYTHONPATH="${pythonWithDeps}/${pkgs.python3.sitePackages}:$PYTHONPATH"
+            	export PLATFORMIO_PYTHON_PATH="${pythonWithDeps}/bin/python3"
+            
+            	REAL_ESPTOOL=$(find ${pkgs.esptool} -name "esptool.py" | head -n 1)
+            
+            	mkdir -p ~/.platformio/packages/tool-esptoolpy
+            	ln -sf $REAL_ESPTOOL ~/.platformio/packages/tool-esptoolpy/esptool.py
+            
+            	if [ ! -f ~/.platformio/packages/tool-esptoolpy/package.json ]; then
+            	  	echo '{"name": "tool-esptoolpy", "version": "4.6.2", "description": "esptool.py"}' > ~/.platformio/packages/tool-esptoolpy/package.json
+            	fi
+          	'';
           		runScript = "bash";
         	}).env;
     	}
