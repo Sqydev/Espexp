@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<body>
-		<span id="value">50</span>
-		<input type="range" id="slider" min="0" max="255" value="60" oninput="updateSliderVal(this.value); sendValue(this.value)">
+		<span id="valueR">60</span>
+		<input type="range" id="sliderR" min="0" max="255" value="60" oninput="updateSliderValR(this.value);" onchange="sendValueR();">
+
+		<span id="valueG">30</span>
+		<input type="range" id="sliderG" min="0" max="255" value="30" oninput="updateSliderValG(this.value);" onchange="sendValueG();">
+
+		<span id="valueB">80</span>
+		<input type="range" id="sliderB" min="0" max="255" value="80" oninput="updateSliderValB(this.value);" onchange="sendValueB();">
 
 		<script src="script.js"></script>
 	</body>
